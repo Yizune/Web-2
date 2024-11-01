@@ -1,0 +1,254 @@
+$my-light-black-color: #292b29;
+$my-black-color: #1E201E;
+$my-white-color:#dbdbdb;
+$my-light-gray-color: #b6b6b6;
+$my-dark-gray-color: #7e7e7e;
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: $my-white-color;
+}
+
+.darkmode {
+  background: $my-black-color;
+  .header {
+    
+    .header-text{
+
+      h1{
+        color: $my-white-color;
+      }
+
+    }
+
+    .mode-icon{
+      #theme-switch {
+        background-color: $my-light-black-color;
+  
+        &:hover {
+          box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+          background-color: $my-white-color;
+        }
+  
+        svg {
+          fill: $my-white-color;
+
+          &:hover{
+              fill: $my-black-color;
+            }
+  
+          &:first-child {
+            display: none;
+          }
+  
+          &:last-child {
+            display: inline;
+          }
+        }
+      }
+    }    
+  }
+
+
+  .cards {
+    .card {
+      p {
+        color: $my-black-color; 
+      }
+    }
+  }
+}
+
+.container {
+    display:flex;
+}
+
+.header, .cards, .filters{
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    max-width: 100%;
+    padding: 0 20px; 
+}
+
+.header {
+    margin-bottom: 150px;
+
+  .mode-icon{
+
+    #theme-switch {
+      height: 50px;
+      width: 50px;
+      padding: 0;
+      border-radius: 50%;
+      border-color: transparent;
+      background-color: $my-light-gray-color;
+      top: 20px;
+      right: 20px;
+      transition: background-color 0.2s ease-out, box-shadow 0.2s ease-out;
+  
+      &:hover {
+          box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+          background-color: $my-black-color;
+        }
+  
+      svg {
+        fill: $my-black-color; 
+        padding-top: 3px;
+        height: 40px;
+        width: 40px;
+  
+        &:hover{
+          fill: $my-white-color;
+        }
+  
+        &:last-child {
+          display: none; 
+        }
+      }
+    }
+  }
+}
+
+.cards {
+    gap: 20px; 
+    margin-top: 0; 
+  
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;  
+      width: 500px;
+      min-width: 200px;
+      text-align: center;  
+      box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1); 
+      transition: transform 0.3s, box-shadow 0.3s; 
+
+      &:hover{
+        transform: translateY(-5px); 
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+      }
+
+      h4{
+        margin-bottom: 30px;
+      }
+    }
+  
+    .income {
+        h4{
+            color: rgb(0, 214, 18);
+        }
+    }
+  
+    .expenses {
+        h4{
+            color: rgb(214, 0, 0);
+        }
+    }
+  
+    .balance {
+        h4{
+            color: rgb(0, 75, 214);
+        }
+    }
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+
+  .search-filter { 
+    justify-content: left;
+
+    .input-wrapper {
+      position: relative;
+      width: 300px; 
+      
+      .input {
+        width: 100%;
+        height: 50px;
+        padding-left: 40px; 
+        border-radius: 10px;
+        border: 2px solid #ccc;
+        font-size: 16px;
+        box-sizing: border-box;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        outline: none;
+      }
+      
+      .search-icon {
+        position: absolute;
+        top: 50%;
+        left: 10px; 
+        transform: translateY(-50%);
+        width: 24px;
+        height: 24px;
+        filter: brightness(0) invert(0);
+      }
+    }
+  }
+
+  .category-filter {
+    margin-right: 400px;
+    gap: 10px;
+    select {
+      width: 200px; 
+      height: 40px; 
+      border: 1px solid #ccc; 
+      border-radius: 10px; 
+      background-color: white;
+      font-size: 16px;
+      padding: 0 30px 0 10px;
+      margin-left: 20px;
+      outline: none;
+    }  
+  }
+} 
+
+.buttons{
+  .filter-buttons{
+    display: flex; 
+    gap: 10px;
+
+    .add-trans{
+      margin-left: 20px;
+  
+      button {
+        background-color: $my-black-color;
+        color: $my-white-color;
+        border-radius: 5px;
+        border: none;
+        font-size: 16px;
+        height: 40px;
+        width: 200px;
+      }
+    }
+    .remove-selected{
+      margin-left: 20px;
+  
+      button{
+        background-color: rgb(248, 96, 41);
+        color: $my-white-color;
+        border-radius: 5px;
+        border: none;
+        font-size: 16px;
+        height: 40px;
+        width: 200px;
+      }
+    }
+    .clear{
+      margin-left: 20px;
+  
+      button{
+        background-color: $my-black-color;
+        color: $my-white-color;
+        border-radius: 5px;
+        border: none;
+        font-size: 16px;
+        height: 40px;
+        width: 200px;
+      }
+    }
+  }
+}
