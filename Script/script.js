@@ -598,8 +598,10 @@ function darkModeFunction() {
     var element = document.getElementById("body");
     if (element.classList.contains("darkmode")) {
         element.classList.remove("darkmode");
+        localStorage.setItem("darkMode", "false");
     } else {
         element.classList.add("darkmode");
+        localStorage.setItem("darkMode", "true");
     }
     setChartBackground();
 }
@@ -610,6 +612,12 @@ window.onload = function() {
     //Me
     loadFromLocalStorage(); 
     createTable(transactions); 
+
+    const darkModeEnabled = localStorage.getItem("darkMode") === "true";
+    if (darkModeEnabled) {
+        document.getElementById("body").classList.add("darkmode");
+        setChartBackground();
+    }
 
     const type = document.getElementById("type");
     const categories = document.getElementById("categories");
