@@ -1,4 +1,4 @@
-const transactions = [
+let transactions = JSON.parse(localStorage.getItem("transactions")) || [
     {
         id: "1",
         type: "income",
@@ -133,7 +133,19 @@ let incomeTotal = 0;
 let expensesTotal = 0
 let removeBtn, editBtn, addBtn, clearBtn;
 let filteredTransactions;
-let editTransactionId = null;
+let editTransactionId = null; 
+
+function loadFromLocalStorage() {
+    const savedTransactions = localStorage.getItem("transactions");
+    if (savedTransactions) {
+        transactions = JSON.parse(savedTransactions);
+        console.log("Loaded transactions from localStorage:", transactions);
+    }
+}
+function saveToLocalStorage() {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+}
+
 
 function createTable(data = transactions) {
     //This was beginning point so it was like all or mostly AI/help
@@ -168,23 +180,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
     removeBtn.onclick = function () {
         const selectedRows = document.querySelectorAll("#transactionsTable tr.selected");
-
+    
         if (selectedRows.length > 1) {
             openPopup('remove', {
                 message: "Are you sure you want to delete the selected rows?",
                 onConfirm: function () {
-                    selectedRows.forEach(row => row.remove());
+                    selectedRows.forEach(row => {
+                        const id = row.querySelector("td").textContent;
+                        transactions = transactions.filter(transaction => transaction.id !== id);
+                        row.remove();
+                    });
+                    saveToLocalStorage();
                     closePopup();
+                    createTable(transactions); 
                 }
             });
-        } else {
+        } else if (selectedRows.length === 1) {
             openPopup('remove', {
                 message: "Are you sure you want to delete the selected row?",
                 onConfirm: function () {
-                    selectedRows.forEach(row => row.remove());
+                    selectedRows.forEach(row => {
+                        const id = row.querySelector("td").textContent;
+                        transactions = transactions.filter(transaction => transaction.id !== id);
+                        row.remove();
+                    });
+                    saveToLocalStorage();
                     closePopup();
+                    createTable(transactions); 
                 }
             });
+        } else {
+            alert("Please select at least one row to remove.");
         }
     };
 
@@ -267,7 +293,7 @@ function addButton() {
     });
 
     createTable(transactions);
-
+    saveToLocalStorage();
     closePopup();
 }
 
@@ -280,16 +306,15 @@ function editButton() {
     }
 
     const cells = selectedRows[0].querySelectorAll("td");
-    editTransactionId = cells[0].textContent; // Store ID of the transaction being edited
+    editTransactionId = cells[0].textContent; 
 
-    // Populate the popup form with the selected row's values
     document.getElementById('popupType').value = cells[1].textContent;
     document.getElementById('popupAmount').value = parseFloat(cells[2].textContent);
     document.getElementById('popupCategory').value = cells[3].textContent;
     document.getElementById('popupDate').value = cells[4].textContent;
     document.getElementById('popupDescription').value = cells[5].textContent;
 
-    openPopup('edit'); // Open the edit popup
+    openPopup('edit');
 }
 
 function confirmEdit() {
@@ -304,7 +329,6 @@ function confirmEdit() {
         return;
     }
 
-    // Find and update the transaction
     const transaction = transactions.find(t => t.id === editTransactionId);
     if (transaction) {
         transaction.type = type;
@@ -314,8 +338,9 @@ function confirmEdit() {
         transaction.description = description;
     }
 
-    createTable(transactions); // Refresh the table with the updated values
-    closePopup(); // Close the popup
+    createTable(transactions);
+    saveToLocalStorage();
+    closePopup(); 
 }
 
 function masterFilter() {
@@ -579,9 +604,13 @@ function darkModeFunction() {
     setChartBackground();
 }
 
+// RECENTLY FOUND OUT I CAN STORE ALL OF THE INITIALIZATIONS IN THIS FUNCTION SO I DON'T REPEAT IT 10000000 TIMES DON'T BLAME ME FOR IT MONKEY IS SMARTER NOW SAME MISTAKES WONT HAPPEN
 
 window.onload = function() {
-    //Me 
+    //Me
+    loadFromLocalStorage(); 
+    createTable(transactions); 
+
     const type = document.getElementById("type");
     const categories = document.getElementById("categories");
     const amount = document.getElementById("amount");
@@ -615,7 +644,6 @@ window.onload = function() {
         masterFilter(); 
     });
 
-    createTable();
     filterChecker();
     clearButton(); 
 }
