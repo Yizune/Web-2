@@ -75,7 +75,7 @@ body {
     display:flex;
 }
 
-.header, .cards, .filters, .tableOne{
+.header, .cards, .filters, .tableOne, .addRow{
     display: flex;
     justify-content: space-between;
     align-items: center; 
@@ -102,6 +102,7 @@ body {
       &:hover {
           box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
           background-color: $my-black-color;
+          cursor: pointer;
         }
   
       svg {
@@ -215,6 +216,9 @@ body {
       margin-left: 20px;
       outline: none;
     }  
+    :hover{
+      cursor: pointer;
+    }
   }
 } 
 
@@ -317,9 +321,9 @@ body {
   margin-bottom: 50px;
   #transactionsTable {
     width: 100%;
+    border-radius: 10px;
     table-layout: fixed; 
     border-collapse: collapse;
-    border-radius:10px;
     overflow: hidden;
     .selected {
       background-color: lightblue; 
@@ -346,3 +350,67 @@ body {
     }
   }
 }
+
+#chart-container {
+    width: 100%;
+    height: 700px;
+    margin-bottom: 100px;
+}
+
+
+.popup {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0, 0, 0, 0.5); 
+  .popup-content {
+    background-color: white;
+    margin: 10% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      .close:hover,
+      .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+    .actions button {
+      padding: 10px;
+      margin: 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+#addTransactionForm {
+  display: none;
+}
+
+#editTransactionForm {
+  display: none;
+}
+
+#removeTransactionForm { 
+  display: none;
+}
+
+
+
+
+
+
+
+
+

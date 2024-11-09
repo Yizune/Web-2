@@ -40,7 +40,7 @@ body {
   display: flex;
 }
 
-.header, .cards, .filters, .tableOne {
+.header, .cards, .filters, .tableOne, .addRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,6 +65,7 @@ body {
 .header .mode-icon #theme-switch:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
   background-color: #1E201E;
+  cursor: pointer;
 }
 .header .mode-icon #theme-switch svg {
   fill: #1E201E;
@@ -157,6 +158,9 @@ body {
   padding: 0 30px 0 10px;
   margin-left: 20px;
   outline: none;
+}
+.filters .category-filter :hover {
+  cursor: pointer;
 }
 
 .buttons {
@@ -251,9 +255,9 @@ body {
 }
 .tableOne #transactionsTable {
   width: 100%;
+  border-radius: 10px;
   table-layout: fixed;
   border-collapse: collapse;
-  border-radius: 10px;
   overflow: hidden;
 }
 .tableOne #transactionsTable .selected {
@@ -277,4 +281,58 @@ body {
 }
 .tableOne #transactionsTable th :last-child, .tableOne #transactionsTable td :last-child {
   border-right: none;
+}
+
+#chart-container {
+  width: 100%;
+  height: 700px;
+  margin-bottom: 100px;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.popup .popup-content {
+  background-color: white;
+  margin: 10% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Could be more or less, depending on screen size */
+}
+.popup .popup-content .close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.popup .popup-content .close .close:hover,
+.popup .popup-content .close .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.popup .popup-content .actions button {
+  padding: 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+#addTransactionForm {
+  display: none;
+}
+
+#editTransactionForm {
+  display: none;
+}
+
+#removeTransactionForm {
+  display: none;
 }/*# sourceMappingURL=style.css.map */

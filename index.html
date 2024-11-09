@@ -3,12 +3,18 @@
 
 <head>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-core.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-pie.min.js"></script>
   <script src="Script/script.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Personal Finance Tracker</title>
 </head>
+
+
 <body id="body">
+
+
   <div class="header container">
     <div class="header-text">
       <h1>Personal Finance Tracker</h1>
@@ -28,10 +34,9 @@
   </div>
 
 
+  <input type="text" id="inputTest" placeholder="test">
 
-  <div id="output">
 
-  </div>
 
   <div class="filters buttons container">
     <div class="search-filter">
@@ -62,12 +67,10 @@
         <option value="Miscellaneous">Miscellaneous</option>
       </select>
     
-      <select name="date" id="date">
+      <select name="amount" id="amount">
         <option value="ignore">Filter Options</option>
         <option value="ascAmount">Sort by Ascending Amount</option>
         <option value="descAmount">Sort by Descending Amount</option>
-        <option value="latestDate">Sort by Latest Date</option>
-        <option value="earliestDate">Sort by Earliest Date</option>
       </select>
     </div>
     
@@ -76,18 +79,16 @@
         <button class="disabled">Clear All</button>
       </div>
       <div class="add-selected">
-        <button class="disabled">Add Transaction</button>
+        <button class="disabled" id="addBtn">Add Transaction</button>
       </div>
       <div class="remove-selected">
-        <button class="disabled">Remove Selected</button>
+        <button class="disabled" id="removeBtn">Remove Selected</button>
       </div>
       <div class="edit-selected">
-        <button class="disabled">Edit Selected</button>
+        <button class="disabled" id="editBtn">Edit Selected</button>
       </div>
     </div>
   </div>
-
-
 
   <div class="tableOne container">
     <table id="transactionsTable">
@@ -107,7 +108,84 @@
   </table>
   </div>
 
+  <div id="popup" class="popup">
+    <div class="popup-content">
 
+        <h2 id="popupTitle">Popup Title</h2>
+        
+        <form id="addTransactionForm">
+            <label for="type">Type:</label>
+            <select id="addPopupType">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+            <label for="amount">Amount:</label>
+            <input id="addPopupAmount" type="number" placeholder="Amount">
+            <label for="category">Category:</label>
+            <select id="addPopupCategory">
+                <option value="Salary">Salary</option>
+                <option value="Freelance">Freelance</option>
+                <option value="Food">Food</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Rent">Rent</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Investment">Investment</option>
+                <option value="Part-time Job">Part-time Job</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+            </select>
+            <label for="date">Date:</label>
+            <input id="addPopupDate" type="date">
+            <label for="description">Description:</label>
+            <textarea id="addPopupDescription" placeholder="Description"></textarea>
+            <div class="actions">
+                <button type="button" onclick="addButton()">Confirm</button>
+                <button type="button" onclick="closePopup()">Cancel</button>
+            </div>
+        </form>
+
+        <form id="editTransactionForm">
+          <label for="type">Type TEST TYPE:</label>
+          <select id="popupType">
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+          </select>
+          <label for="amount">Amount:</label>
+          <input id="popupAmount" type="number" placeholder="Amount">
+          <label for="category">Category:</label>
+          <select id="popupCategory">
+              <option value="Salary">Salary</option>
+              <option value="Freelance">Freelance</option>
+              <option value="Food">Food</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Rent">Rent</option>
+              <option value="Utilities">Utilities</option>
+              <option value="Transportation">Transportation</option>
+              <option value="Investment">Investment</option>
+              <option value="Part-time Job">Part-time Job</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Miscellaneous">Miscellaneous</option>
+          </select>
+          <label for="date">Date:</label>
+          <input id="popupDate" type="date">
+          <label for="description">Description:</label>
+          <textarea id="popupDescription" placeholder="Description"></textarea>
+          <div class="actions">
+              <button type="button" onclick="confirmEdit()">Confirm</button>
+              <button type="button" onclick="closePopup()">Cancel</button>
+          </div>
+      </form>
+
+        <div id="removeTransactionForm">
+            <p id="confirmationText">Are you sure you want to proceed?</p>
+            <div class="actions">
+                <button id="confirmAction" type="button">Yes</button>
+                <button type="button" onclick="closePopup()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 
   <div class="cards container">
     <div class="card income">
@@ -123,6 +201,10 @@
       <!-- Math is done dynamically -->
     </div>
   </div>
+
+  <div class="chart-wrapper container">
+    <div id="chart-container"></div>
+</div>
 
 </body>
 </html>
