@@ -127,6 +127,7 @@ const transactions = [
 // Do I at least have a better grasp and understanding of js? Yes. I actually found myself writting stuff myself which was nearly impossible on the last project and at the start of this one.
 // Wouldn't say this was 50% my effort alone, but I would like to say it was somewhere close to it. Still better than nothing! 
 
+
 let chart; 
 let incomeTotal = 0;
 let expensesTotal = 0
