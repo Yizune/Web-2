@@ -57,6 +57,9 @@ body {
         button{
           background-color: $my-white-color;
           color: $my-black-color;
+          // &:hover {
+          //   background-color: rgb(238, 238, 238); 
+          // } - doesn't work for some reason
         }
       }
     }
